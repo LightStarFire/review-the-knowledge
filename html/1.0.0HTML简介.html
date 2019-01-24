@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>我的第一个HTML网页</h1>
+    <p>这是一个段落</p>
+</body>
+</html>
+<!--
+<!DOCTYPE html> 声明为HTML5文档
+<html> 元素是HTML页面的根元素
+<head> 元素包含了文档元（meta）数据，如 <meta charset="utf-8"> 定义网页编码格式为 utf-8。
+<title> 元素描述了文档的标题
+<body> 元素包含了可见的页面内容
+
+什么是HTML?
+HTML 指的是超文本标记语言: HyperText Markup Language
+HTML 不是一种编程语言，而是一种标记语言
+标记语言是一套标记标签（markup tag）
+HTML 使用标记标签来描述网页
+
+HTML 标签
+HTML 标记标签通常被称为 HTML 标签 (HTML tag)。
+HTML 标签是由尖括号包围的关键词，比如 <html>
+HTML 标签通常是成对出现的，比如 <b> 和 </b>
+标签对中的第一个标签是开始标签，第二个标签是结束标签
+开始和结束标签也被称为开放标签和闭合标签
+<标签>内容</标签>
+
+HTML 元素
+"HTML 标签" 和 "HTML 元素" 通常都是描述同样的意思.
+但是严格来讲, 一个 HTML 元素包含了开始标签与结束标签，如下实例:
+<p>这是一个段落。</p>
+
+Web 浏览器
+Web浏览器（如谷歌浏览器，Internet Explorer，Firefox，Safari）是用于读取HTML文件，并将其作为网页显示。
+浏览器并不是直接显示的HTML标签，但可以使用标签来决定如何展现HTML页面的内容给用户：
+
+HTML版本
+从初期的网络诞生后，已经出现了许多HTML版本:
+版本	发布时间
+HTML	    1991
+HTML+	    1993
+HTML 2.0	1995
+HTML 3.2	1997
+HTML 4.01	1999
+XHTML 1.0	2000
+HTML5	    2012
+XHTML5	    2013
+
+<!DOCTYPE> 声明
+<!DOCTYPE>声明有助于浏览器中正确显示网页。
+网络上有很多不同的文件，如果能够正确声明HTML的版本，浏览器就能正确显示网页内容。
+doctype 声明是不区分大小写的，以下方式均可：
+<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!doctype html>
+<!Doctype Html>
+
+HTML5
+<!DOCTYPE html>
+HTML 4.01
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+XHTML 1.0
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+HTML <!DOCTYPE> 声明
+所有主流浏览器都支持 <!DOCTYPE> 声明。
+<!DOCTYPE> 声明位于文档中的最前面的位置，处于 <html> 标签之前。
+<!DOCTYPE> 声明不是一个 HTML 标签；它是用来告知 Web 浏览器页面使用了哪种 HTML 版本。
+在 HTML 4.01 中，<!DOCTYPE> 声明需引用 DTD （文档类型声明），因为 HTML 4.01 是基于 SGML （Standard Generalized Markup Language 标准通用标记语言）。
+DTD 指定了标记语言的规则，确保了浏览器能够正确的渲染内容。
+
+DTD
+文档类型定义(Document Type Definition)是一套为了进行程序间的数据交换而建立的关于标记符的语法规则。
+它是标准通用标记语言和 [1]  可扩展标记语言1.0版规格的一部分，文档可根据某种DTD语法规则验证格式是否符合此规则。
+文档类型定义也可用做保证标准通用标记语言、可扩展标记语言文档格式的合法性，可通过比较文档和文档类型定义文件来检查文档是否符合规范，元素和标签使用是否正确
+
+SGML
+SGML是国际上定义电子文档和内容描述的标准。它源于1969年IBM公司开发的文档描述语言GML，GML主要用来解决不同系统中文档格式不同的问题。后经过多年发展，1986年经ISO批准为国际标准ISO8897，并被称为SGML。
+制定SGML的基本思想是把文档的内容与样式分开。在SGML中，标记分两种：一种用来描述文档显示的样式，称为程序标记；另一种用来描述文档中语句的用途，称为描述标记。一个SGML文件通常分三个层次：结构、内容和样式。结构为组织文档的元素提供框架，内容是信息本身，样式控制内容的显示。
+SGML的平台无关性、结构化、可扩展等特性，使得它使用范围很广，被许多大型公司用来创建和发布信息。
+
+HTML 4.01 规定了三种不同的 <!DOCTYPE> 声明，分别是：Strict、Transitional 和 Frameset。 HTML5 中仅规定了一种：
+
+严格Strict
+严格是HTML的最基本形式; 除了表示元素之外，它允许使用所有HTML功能。演示元素为网页添加样式;
+<font>标记是HTML Strict中不允许的表示元素的示例。打开网页的浏览器将查找“文档类型声明”以确定如何呈现页面。
+如果将其声明为Strict并使用（例如）Transitional元素，则页面将无法正确显示。
+
+过渡Transitional
+过渡文档类型允许Strict文档类型允许的所有元素，以及Strict中不允许的一些元素。要再次使用相同的示例，Strict文档类型中不允许使用<font>标记，但在Transitional文档类型中允许使用<font>标记。框架集是一种在分区或框架区域中显示内容的方式; Transitional和Strict都不允许在其文档类型中使用Framesets。
+
+框架集Frameset
+Frameset是另一种HTML文档; 它与Transitional文档类型非常相似。它允许使用所有Strict元素以及所有Transitional元素，如<font>标记。您还可以在另一个文档中使用Frameset。框架集是使用<frameset>标记显示Web内容的独特方式。根据框架的结构，使用将能够调整页面上框架的比例。
+
+<!DOCTYPE html> 是 HTML5 中唯一的 doctype，也被视作将网页 "升级" 到 HTML5 的第一步。
+很多国外网站的 <!DOCTYPE html> 和 <HEAD> 之间都会有一段注释,如:
+[if IE 6 ]><html class="ie ielt9 ielt8 ielt7 ie6" lang="en-US"><![endif]
+[if IE 7 ]><html class="ie ielt9 ielt8 ie7" lang="en-US"><![endif]
+[if IE 8 ]><html class="ie ielt9 ie8" lang="en-US"><![endif]
+[if IE 9 ]><html class="ie ie9" lang="en-US"><![endif]
+[if (gt IE 9)|!(IE)]><!—><html lang="en-US"><!—<![endif]
+
+css 文件是这样写的：
+.ie6 xxx {};
+.ie7 xxx {};
+
+HTML 编辑器推荐
+可以使用专业的 HTML 编辑器来编辑 HTML，菜鸟教程为大家推荐几款常用的编辑器：
+Notepad++：https://notepad-plus-plus.org/
+Sublime Text：http://www.sublimetext.com/
+VS Code：https://code.visualstudio.com/
+
+HTML 标题
+HTML 标题（Heading）是通过<h1> - <h6> 标签来定义的.
+<h1>这是标题 1</h1>
+<h2>这是标题 2</h2>
+<h3>这是标题 3</h3>
+<h4>这是标题 4</h4>
+<h5>这是标题 5</h5>
+<h6>这是标题 6</h6>
+
+HTML 段落
+HTML 段落是通过标签 <p> 来定义的.
+<p>这是一个段落。</p>
+<p>这是另外一个段落。</p>
+
+HTML <head> 元素
+<head> 元素包含了所有的头部标签元素。在 <head>元素中你可以插入脚本（scripts）, 样式文件（CSS），及各种meta信息。
+可以添加在头部区域的元素标签为: <title>, <style>, <meta>, <link>, <script>, <noscript>, and <base>.
+
+HTML <title> 元素
+<title> 标签定义了不同文档的标题。
+<title> 在 HTML/XHTML 文档中是必须的。
+<title> 元素:
+定义了浏览器工具栏的标题
+当网页添加到收藏夹时，显示在收藏夹中的标题
+显示在搜索引擎结果页面的标题
+
+HTML <base> 元素
+<base> 标签描述了基本的链接地址/链接目标，该标签作为HTML文档中所有的链接标签的默认链接:
+<head>
+<base href="http://www.baidu.com" target="_blank">
+</head>
+
+HTML <link> 元素
+<link> 标签定义了文档与外部资源之间的关系。
+<link> 标签通常用于链接到样式表:
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+HTML <style> 元素
+<style> 标签定义了HTML文档的样式文件引用地址.
+在<style> 元素中你也可以直接添加样式来渲染 HTML 文档
+
+HTML <meta> 元素
+meta标签描述了一些基本的元数据。
+<meta> 标签提供了元数据.元数据也不显示在页面上，但会被浏览器解析。
+META 元素通常用于指定网页的描述，关键词，文件的最后修改时间，作者，和其他元数据。
+元数据可以使用于浏览器（如何显示内容或重新加载页面），搜索引擎（关键词），或其他Web服务。
+<meta> 一般放置于 <head> 区域
+<meta> 标签- 使用实例
+为搜索引擎定义关键词:
+<meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
+为网页定义描述内容:
+<meta name="description" content="免费 Web & 编程 教程">
+定义网页作者:
+<meta name="author" content="Runoob">
+每30秒钟刷新当前页面:
+<meta http-equiv="refresh" content="30">
+
+HTML <script> 元素
+<script>标签用于加载脚本文件，如： JavaScript。
+<script> 元素在以后的章节中会详细描述。
+
+HTML head 元素
+标签	描述
+<head>	定义了文档的信息
+<title>	定义了文档的标题
+<base>	定义了页面链接标签的默认链接地址
+<link>	定义了一个文档和外部资源之间的关系
+<meta>	定义了HTML文档中的元数据
+<script>	定义了客户端的脚本文件
+<style>	定义了HTML文档的样式文件
+
+HTML 样式- CSS
+CSS (Cascading Style Sheets) 用于渲染HTML元素标签的样式.
+
+如何使用CSS
+CSS 是在 HTML 4 开始使用的,是为了更好的渲染HTML元素而引入的.
+CSS 可以通过以下方式添加到HTML中:
+内联样式- 在HTML元素中使用"style" 属性
+内部样式表 -在HTML文档头部 <head> 区域使用<style> 元素 来包含CSS
+外部引用 - 使用外部 CSS 文件
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+已弃用的标签和属性
+在HTML 4, 原来支持定义HTML元素样式的标签和属性已被弃用。这些标签将不支持新版本的HTML标签。
+不建议使用的标签有: <font>, <center>, <strike>
+不建议使用的属性: color 和 bgcolor.
+
+HTML 链接
+HTML 链接是通过标签 <a> 来定义的.
+<a href="http://www.baidu.com">这是一个链接</a>
+
+HTML 图像
+HTML 图像是通过标签 <img> 来定义的.
+<img src="/images/logo.png" width="258" height="39" />
+注意： 图像的名称和尺寸是以属性的形式提供的。
+
+HTML 元素
+由开始标签 *	元素内容	结束标签 * 组成
+
+HTML 元素语法
+HTML 元素以开始标签起始
+HTML 元素以结束标签终止
+元素的内容是开始标签与结束标签之间的内容
+某些 HTML 元素具有空内容（empty content）
+空元素在开始标签中进行关闭（以开始标签的结束而结束）br hr
+大多数 HTML 元素可拥有属性
+
+不要忘记结束标签
+即使您忘记了使用结束标签，大多数浏览器也会正确地显示 HTML：
+但不要依赖这种做法。忘记使用结束标签会产生不可预料的结果或错误。
+
+HTML 空元素
+没有内容的 HTML 元素被称为空元素。空元素是在开始标签中关闭的。
+<br> 就是没有关闭标签的空元素（<br> 标签定义换行）。
+在 XHTML、XML 以及未来版本的 HTML 中，所有元素都必须被关闭。
+在开始标签中添加斜杠，比如 <br />，是关闭空元素的正确方法，HTML、XHTML 和 XML 都接受这种方式。
+即使 <br> 在所有浏览器中都是有效的，但使用 <br /> 其实是更长远的保障。
+
+HTML 提示：使用小写标签
+HTML 标签对大小写不敏感：<P> 等同于 <p>。许多网站都使用大写的 HTML 标签。
+菜鸟教程使用的是小写标签，因为万维网联盟（W3C）在 HTML 4 中推荐使用小写，而在未来 (X)HTML 版本中强制使用小写。
+
+HTML 属性
+HTML 元素可以设置属性
+属性可以在元素中添加附加信息
+属性一般描述于开始标签
+属性总是以名称/值对的形式出现，比如：name="value"。
+
+HTML 属性常用引用属性值
+属性值应该始终被包括在引号内。
+双引号是最常用的，不过使用单引号也没有问题。
+Remark提示: 在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号，例如：name='John "ShotGun" Nelson'
+
+HTML 提示：使用小写属性
+属性和属性值对大小写不敏感。
+不过，万维网联盟在其 HTML 4 推荐标准中推荐小写的属性/属性值。
+而新版本的 (X)HTML 要求使用小写属性。
+
+标题很重要
+请确保将 HTML 标题 标签只用于标题。不要仅仅是为了生成粗体或大号的文本而使用标题。
+搜索引擎使用标题为您的网页的结构和内容编制索引。
+因为用户可以通过标题来快速浏览您的网页，所以用标题来呈现文档结构是很重要的。
+应该将 h1 用作主标题（最重要的），其后是 h2（次重要的），再其次是 h3，以此类推。
+
+HTML 水平线
+<hr> 标签在 HTML 页面中创建水平线。
+
+HTML 注释
+可以将注释插入 HTML 代码中，这样可以提高其可读性，使代码更易被人理解。浏览器会忽略注释，也不会显示它们。
+-->
