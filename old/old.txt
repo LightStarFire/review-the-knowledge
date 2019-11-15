@@ -1,0 +1,265 @@
+1.新增元素无法触发事件怎么办？？
+答：可以通过on方法绑定事件，可以绑定到它的父级或者body中，实现如下：
+$("#ulLabel").on('click','.liLabel',function(){
+ alert('OK')
+});
+或者：
+父元素         事假      子元素    方法
+$("body").on('click','.liLabel',function(){
+ alert('OK')
+});
+
+2.在JavaScript中一个空格是否等于两个空格？
+答：不是，我们可以使用正则表达式替换，也可以用字符串截取来判断，还可以使用jq  trim（）这个方法。
+
+3.window7如何让桌面图标随意摆放？
+答：右键--个性化--更改桌面图标--只选择计算机、回收站、网络这三个就行--回到左面右键把查看中的自动排列图标取消掉。
+
+4.jquery中prop()方法和attr()方法区别？
+答：
+A:jquery1.6中新增了一个方法prop(),一直没用过他，官方的解释只有一句话：获取在匹配的元素集中的第一个元素的属性值。
+对于“获取在匹配的元素集中的第一个元素的属性值”这一句话的理解：prop()的所有“设置属性”操作针对的是当前jquery对象所匹配的每一个元素；所有“读取操作”只针对第一个匹配的元素。（与jq的html()和text()这两个方法相似）
+B:在1.6版本以前attr()对于表单元素的“checked”“selected”“disabled”等属性的获取返回的是boolean类型，在1.6版本开始获取这些属性就是String类型了，如果被选中，就返回“checked”“slelected”“disabled”,否者返回undefined（即元素节点没有该属性）。
+C:操作对象的不同，attr()函数的设计目标是用于设置或获取指定的DOM元素所对应文档节点上的属性，prop()函数设计的目的是用于设置或获取指定的DOM元素（指的是JS对象，Element类型）上的属性。
+
+5.写一个每次都不重复可以要任意个随机数，怎么做？
+1、定义一个数组。
+var array = new Array();//定义存放生成随机数的数组
+2、写一个循环N次生成随机数
+//num生成几个随机数
+function shengcheng(num){
+    array = [];//清空数组
+    for(var i = 0;;i++){
+        if(array.length<num){
+            gennrateRandom(num);
+        }
+    }
+}
+3、生成随机数的方法
+function gennrateRandom(count){
+    var rand = parseInt(Math.random()*count);
+    for(var i = 0;i<array.length;i++){
+        if(array[i] == rand){
+            return false;
+        }
+    }
+    array.push(rand);
+}
+or
+function Random(count){
+    var array = new Array();//定义一个数组用来存放随机数
+    for(var i = 0;i < array.length;i++){
+        var bool = false;//定义一个boolean类型用来判断数组是否有重复的 
+        var temp = parseInt(Math.random()*count);
+        for(var j = 0;j < array.length;j++){
+            if(array[j] == temp){
+                bool = true;
+            }
+        }
+        if（bool）{
+            i--;//有重复的让他重新生成随机数直到不重复为止
+            continue;
+        } 
+        array[i] = temp;
+    }
+    return array;
+}
+
+6.点击加载
+引入jq
+$(function(){
+	//初始化
+	var counter = 0;/*计数器*/
+	var pageStart = 0;/*offset当前加载了多少条*/
+	var pageSize = 1;/*size 每次加载的条数*/
+			
+	/*首次加载*/
+	getData(pageStart,pageSize);
+			
+	/*监听加载更多*/
+	$(document).on('click','.jiazai',function(){
+		//加载几次
+		counter++;
+		//当前共加载了多少条
+		pageStart = counter*pageSize;
+		getData(pageStart,pageSize);
+			
+				
+	});
+});
+function getData(offset,size){
+	$.ajax({
+		type:"get",
+		url:"blog.json",
+		dataType:"json",
+		async:true,
+		success:function(data){
+			var datas = data.list;
+			var sum = datas.length;
+			var result = "";
+			/**************业务逻辑块：实现拼接html内容并append到页面****************/
+			/*如果剩下的记录不够分页，就让分页数取剩下的数 */
+			//如果获得的条数总数减去当前已经加载的条数要比一次加载的条数要少就让 一次加载的条数等于获得的条数
+			if(sum - offset <size){
+				size = sum - offset;
+			}
+			//从当前已加载的条数开始循环，每次循环加上每次要加载的条数
+			//使用for循环模拟sql里面的limit（offset，size）
+			for(var i = offset;i<(size+offset);i++){
+				//拼接数据
+				result += '<a href="'+datas[i].url+'" title="'+datas[i].title+'">'+datas[i].desc+"</a>"
+			}
+			//插入数据
+			$(".content").append(result);
+			//如果加载的调数多于总条数我们就alert（“1”）；没有就alert（“2”）
+			if((offset+ size) >= sum){
+				alert("1")
+			}else{
+				alert("2")
+			}
+		},
+		error:function(error){
+			alert(error);
+		}
+	});
+}
+//滚动加载
+$(function(){
+	var counter = 0 ;
+	var pageStart = 0;
+	var pageSize = 0;
+	var isEnd = false;
+			
+	getData(pageStart,pageSize);
+			
+	$(window).scroll(function(){
+		if($(document.height() - $(this).scrollTop - $(this).height() < 100)){
+			counter ++;
+			pageStart = counter*pageSize;
+					
+			getData(pageStart,pageSize);
+		}
+	})
+			
+});
+function getData(offset,size){
+	$.ajax({
+		type:"get",
+		url:"blog.json",
+		dataType:"json",
+		async:true,
+		success:function(data){
+			var datas = data.list;
+			var sum = datas.length;
+			var result = "";
+			/**************业务逻辑块：实现拼接html内容并append到页面****************/
+			/*如果剩下的记录不够分页，就让分页数取剩下的数 */
+			//如果获得的条数总数减去当前已经加载的条数要比一次加载的条数要少就让 一次加载的条数等于获得的条数
+			if(sum - offset <size){
+				size = sum - offset;
+			}
+			//从当前已加载的条数开始循环，每次循环加上每次要加载的条数
+			//使用for循环模拟sql里面的limit（offset，size）
+			for(var i = offset;i<(size+offset);i++){
+				//拼接数据
+				result += '<a href="'+datas[i].url+'" title="'+datas[i].title+'">'+datas[i].desc+"</a>"
+			}
+			//插入数据
+			$(".content").append(result);
+			//如果加载的调数多于总条数我们就不加载了
+			if ( (offset + size) >= sum){
+				isEnd = true;//没有更多了
+			}
+			},
+			error:function(error){
+				alert(error);
+			}
+		});
+}
+
+7.学习jQuery插件开发
+A:插件编写的目的是给已经有的一系列方法或函数做一个封装，以便在其他地方重复使用，方便后期维护。
+
+B:jquery的插件分为三种类型：
+  1)封装对象方法的插件（也就是对象级别的开发）
+  2)封装全局函数的插件（类级别开发）指可以吧独立的函数添加到jquery命名空间之下
+  3)选择器插件
+  
+C:编写jquery插件需要注意的地方：
+  1)插件所有的推荐命名方法为：jquery.[插件名].js。
+  2)所有的对象方法都应该附加到jquery.fn对象上面，而所有的全局函数都应该附加到jquery对象本身上。
+  3)在插件内部，this指向的是当前通过选择器获取的jquery对象，而不像一般方法那样，内部的this指向的是DOM元素。
+  4)可以通过this.each来遍历所有的元素。
+  5)所有方法或函数插件，都应该以分号结尾，否者在压缩的时候可能会出现问题，为了更加保险一点，可以再插件头部添加一个分号（；），以免他们不规范代码给插件带来影响。
+  6)插件应该返回一个jquery对象，以便保证插件的可链式操作。
+  7)避免在插件内部使用￥作为jquery对象的别名，而应当使用完整的jquery来表示。这样可以避免冲突。
+  
+D:jquery提供了两个用于扩展jquery功能的方法
+  1)jquery.fn.extend() //对应着插件类型的第一张方法。
+  2)jquery.extend()  //对应着插件类型的二三种方法。
+  extend（）合并对象，可以把对象相同的属性合并，后者会覆盖前者。
+  使用命名空间：虽然在jquery命名空间中，我们禁止使用了大量的JavaScript函数名和变量名。但是仍不可避免某些函数或变量名将与其他jquery插件冲突，因此我们习惯将一些方法封装到另一个自定义的命名空间。
+  
+E:插件的一般框架如下：(function($){$.fn.myPlugin = function(){} })(jquery);
+
+F:运用在多个元素控件中，可以用this.each方法，可以遍历jquery对象、数组以及集合。
+(function($){
+    $.fn.myPlugin = funcion(){
+        $(this).each(function(){
+	    $(this).hover(function(){
+	        $(this).addClass("Add");
+	    },
+	    function(){
+	        $(this).removeClass("Remove")
+	    })
+	});
+    }
+})(jquery);
+$.myPlugin()//就可以调用这个方法
+each方法遍历当前元素
+
+G:链式操作
+实现链式操作只需要返回的是一个jquery对象，就可以保证链式操作
+
+H:自己定义自己的插件 
+开发框架是:
+$.fn.YouPlugin = function(options){//options代表多个参数
+    //给默认值
+    var defaultVal = {
+    	text : "your mouse is over",
+	ForeColor : "red",
+	BackColor : "gray"
+    }
+    var obj =$.extend(defaultVal,options);
+    return this.each(function(){
+        var selObject = $(this);
+	//获取当前对象 
+        var oldText = selObject.text();
+        //获取当前对象的text值 
+        var oldBgColor = selObject.css("background-color");
+        //获取当前对象的背景色 
+        var oldColor = selObject.css("color");
+        //获取当前对象的字体的颜色 
+        selObject.hover(function() {
+            //定义一个hover方法。 
+            selObject.text(obj.Text);
+            //进行赋值 
+            selObject.css("background-color", obj.BackColor);
+            //进行赋值 
+            selObject.css("color", obj.ForeColor);
+            //进行赋值 
+        },
+	function(){
+	    selObject.text(oldText);
+	    selObject.css("background-color",oldBgColor);
+	    selObject.css("color",oldColor);
+	});
+    });
+}
+
+
+
+
+
+
+
